@@ -15,7 +15,7 @@ const RightCsvName = "direita.csv"
 const CsvDelimiter = ','
 
 var CurrentPath string
-var FilesPath = "../arquivos"
+var FilesPath = "./arquivos"
 
 func init() {
 	dir, err := os.Getwd()
