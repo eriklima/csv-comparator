@@ -15,16 +15,19 @@ const LeftCsvName = "esquerda.csv"
 const RightCsvName = "direita.csv"
 const CsvDelimiter = ','
 
-var currentPath string
 var filesPath = "arquivos"
 
 func init() {
+	currentFilePath := getCurrentFilePath()
+	filesPath = filepath.Join(currentFilePath, filesPath)
+}
+
+func getCurrentFilePath() string {
 	_, filename, _, ok := runtime.Caller(0)
 	if !ok {
 		panic("Failed to get current frame")
 	}
-	currentPath = path.Dir(filename)
-	filesPath = filepath.Join(currentPath, filesPath)
+	return path.Dir(filename)
 }
 
 func main() {
