@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"path"
 	"path/filepath"
+	"runtime"
 	"slices"
 
 	"github.com/eriklima/csv-comparator/internal/csv"
@@ -15,16 +16,14 @@ const RightCsvName = "direita.csv"
 const CsvDelimiter = ','
 
 var CurrentPath string
-var FilesPath = "./arquivos"
+var FilesPath = "arquivos"
 
 func init() {
-	dir, err := os.Getwd()
-
-	if err != nil {
-		panic(err)
+	_, filename, _, ok := runtime.Caller(0)
+	if !ok {
+		panic("Failed to get current frame")
 	}
-
-	CurrentPath = dir
+	CurrentPath = path.Dir(filename)
 	FilesPath = filepath.Join(CurrentPath, FilesPath)
 }
 
